@@ -1,0 +1,23 @@
+MusicMBundle_homepage:
+    pattern:  /
+    defaults: { _controller: MusicMBundle:Page:index }
+    requirements:
+        _method:  GET
+
+MusicMBundle_charts:
+    pattern: /charts
+    defaults: { _controller: MusicMBundle:Page:charts }
+    requirements:
+        _method: GET
+
+MusicMBundle_addtrack:
+    pattern: /addtrack
+    defaults: { _controller: MusicMBundle:Page:addtrack }
+    requirements:
+        _method: GET
+
+MusicMBundle_contact:
+    pattern: /contact
+    defaults: { _controller: MusicMBundle:Page:contact }
+    requirements:
+        _method: GET

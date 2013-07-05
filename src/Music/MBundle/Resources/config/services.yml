@@ -1,0 +1,7 @@
+parameters:
+#    music_m.example.class: Music\MBundle\Example
+
+services:
+#    music_m.example:
+#        class: %music_m.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
