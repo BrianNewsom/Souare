@@ -1,4 +1,4 @@
-Acme\DemoBundle\Entity\Document:
+Music\MBundle\Entity\uploadMusic:
     properties:
         file:
             - File:

@@ -1,9 +1,20 @@
 {% extends 'MusicMBundle::layout.html.twig' %}
 
+{% block title %}Add Track{% endblock%}
+
 {% block body %}
-	<audio controls>
-  		<source src="{{asset('exsongs/1.mp3')}}" type="audio/mpeg">
- 		<source src="horse.ogg" type="audio/ogg">
-	Your browser does not support the audio element.
-	</audio>
+    <header>
+        <h1>Upload your own track</h1>
+    </header>
+
+    <form action="{{ path('MusicMBundle_addtrack') }}" method="post" {{ form_enctype(form) }} class="blogger">
+        {{ form_errors(form) }}
+
+        {{ form_row(form.name) }}
+        {{ form_row(form.file) }}
+
+        {{ form_rest(form) }}
+
+        <input type="submit" value="Submit" />
+    </form>
 {% endblock %}

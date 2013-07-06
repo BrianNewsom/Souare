@@ -36,10 +36,11 @@ class PageController extends Controller
 	        $em->persist($UploadMusic);
 	        $em->flush();
 
-	        return $this->redirect($this->generateUrl('MusicMBundle_contact'));
+	        return $this->redirect($this->generateUrl('MusicMBundle_addtrack'));
 	    }
 
-	    return array('form' => $form->createView());
+	    return $this->render('MusicMBundle:Page:addtrack.html.twig',array('form' => $form->createView()));
+
 	}
 
 	public function contactAction()

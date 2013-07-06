@@ -14,7 +14,7 @@ MusicMBundle_addtrack:
     pattern: /addtrack
     defaults: { _controller: MusicMBundle:Page:addtrack }
     requirements:
-        _method: GET
+        _method: GET|POST
 
 MusicMBundle_contact:
     pattern: /contact
