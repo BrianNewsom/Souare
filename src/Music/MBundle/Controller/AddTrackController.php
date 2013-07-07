@@ -13,6 +13,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class AddTrackController extends Controller
 {
+	$userinfo = $this->get_current_user(oid);
+	echo $userinfo;
 	public function uploadAction(Request $request)
 	{
 	    $UploadMusic = new UploadMusic();

@@ -21,3 +21,4 @@ MusicMBundle_contact:
     defaults: { _controller: MusicMBundle:Page:contact }
     requirements:
         _method: GET
+

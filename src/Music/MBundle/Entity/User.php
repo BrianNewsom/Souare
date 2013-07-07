@@ -18,10 +18,26 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    /**
+     * @var \array
+     */
+    protected $personalTracks;
 
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+        //$this->personalTracks = "HelloWorld";
     }
+    /*
+    public function getPersonalTracks(){
+        return $this->personalTracks;
+    }
+
+    public function addPersonalTrack($track){
+        if (!in_array($track, $this->personalTracks, true)) {
+            $this->personalTracks[] = $track;
+        }
+        return $this;
+    }
+    */
 }
