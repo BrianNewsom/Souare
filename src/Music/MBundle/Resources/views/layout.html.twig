@@ -1,5 +1,5 @@
 {% extends '::base.html.twig' %}
 
 {% block sidebar %}
-    Sidebar content
+                {{ facebook_login_button({'autologoutlink': true}) }}
 {% endblock %}

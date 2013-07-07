@@ -15,7 +15,7 @@
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-
+                {{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}
         <section id="wrapper">
             <header id="header">
                 <div class="top">
@@ -41,7 +41,10 @@
                 {% block body %}{% endblock %}
             </section>
             <aside class="sidebar">
-                {% block sidebar %}{% endblock %}
+                {% block sidebar %}
+
+
+                {% endblock %}
             </aside>
 
             <div id="footer">

@@ -2,3 +2,9 @@ music_m:
     resource: "@MusicMBundle/Resources/config/routing.yml"
     prefix:   /
 
+_security_check:
+  pattern:  /login_check
+  defaults: { _controller: MusicMBundle:Page:index }
+_security_logout:
+  pattern:  /logout
+  defaults: { _controller: MusicMBundle:Page:index }
