@@ -1,7 +1,7 @@
 <?php
 namespace Music\MBundle\Controller;
 // ...
-use Music\MBundle\Entity\UploadMusic;
+use Music\MBundle\Entity\Document;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -13,11 +13,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class AddTrackController extends Controller
 {
-	$userinfo = $this->get_current_user(oid);
-	echo $userinfo;
 	public function uploadAction(Request $request)
 	{
-	    $UploadMusic = new UploadMusic();
+	    /*$UploadMusic = new UploadMusic();
 	    $form = $this->createFormBuilder($UploadMusic)
 	        ->add('name')
 	        ->add('file')
@@ -32,8 +30,15 @@ class AddTrackController extends Controller
 	        $em->flush();
 
 	        return $this->redirect($this->generateUrl('MusicMBundle_contact'));
-	    }
+	    }*/
+		if ($form->isValid()) {
+		    $em = $this->getDoctrine()->getManager();
 
+		    $em->persist($document);
+		    $em->flush();
+
+		    return $this->redirect('MusicMBundle_contact');
+		}
 	    return array('form' => $form->createView());
 	}
 }

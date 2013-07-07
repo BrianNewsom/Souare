@@ -1,4 +1,4 @@
-Music\MBundle\Entity\uploadMusic:
+Music\MBundle\Entity\Document:
     properties:
         file:
             - File:

@@ -3,8 +3,7 @@
 namespace Music\MBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Music\MBundle\Entity\UploadMusic;
-use Music\MBundle\Form\UploadMusicType;
+use Music\MBundle\Entity\Document;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -22,8 +21,8 @@ class PageController extends Controller
 
 	public function addTrackAction(Request $request)
 	{
-	    $UploadMusic = new UploadMusic();
-	    $form = $this->createFormBuilder($UploadMusic)
+	    $document = new Document();
+	    $form = $this->createFormBuilder($document)
 	        ->add('name')
 	        ->add('file')
 	        ->getForm();
@@ -31,16 +30,17 @@ class PageController extends Controller
 	    $form->handleRequest($request);
 
 	    if ($form->isValid()) {
-	        $em = $this->getDoctrine()->getManager();
+		    $em = $this->getDoctrine()->getManager();
 
-	        $em->persist($UploadMusic);
-	        $em->flush();
+		    $document->upload();
 
-	        return $this->redirect($this->generateUrl('MusicMBundle_addtrack'));
-	    }
+		    $em->persist($document);
+		    $em->flush();
 
-	    return $this->render('MusicMBundle:Page:addtrack.html.twig',array('form' => $form->createView()));
+		    return $this->redirect($this->generateUrl('MusicMBundle_addtrack'));
+		}
 
+	    return $this->render('MusicMBundle:Page:addtrack.html.twig', array('form' => $form->createView()));
 	}
 
 	public function contactAction()
