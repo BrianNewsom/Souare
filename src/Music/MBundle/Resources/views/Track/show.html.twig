@@ -6,10 +6,12 @@
 {% block body %}
     <article class="blog">
         <header>
-            <h2> {{Track.name|upper}}, a <b>{{Track.instrument|upper}}</b> track on Souare </h1>
+            <h2> {{ Track.name }}, a {{Track.instrument}} track by {{Track.creator}}</h2>
+            {#<h2> {{Track.name|upper}}, a <b>{{Track.instrument|upper}}</b> track on Souare </h1>#}
         </header>
         <div class="date">Originally published on <time datetime="{{ Track.created|date('c') }}">{{ Track.created|date('g:i A F j, Y') }}</time></div>
         <br>
+
         <audio controls>
 
         <source src="{{ asset(['uploads/tracks/', Track.id, '.', Track.path]|join) }}" type="audio/mpeg">
