@@ -1,4 +1,4 @@
-{# src/Blogger/BlogBundle/Resouces/views/Blog/show.html.twig #}
+{# TODO REFACTOR THIS CODE SO IT ISN'T SO REDUNDANT- Also make it look pretty #}
 {% extends 'MusicMBundle::layout.html.twig' %}
 
 {% block title %}{{Song.title}} on Souare{% endblock %}
@@ -6,14 +6,25 @@
 {% block body %}
     <article class="blog">
         <header>
-            <h2> {{ Song.title }}-- by {{Song.owner}}</h2>
+            <h2> {{ Song.title }} - by {{Song.owner}}</h2>
             {#<h2> {{Track.name|upper}}, a <b>{{Track.instrument|upper}}</b> track on Souare </h1>#}
         </header>
-        <div class="date">Originally published at <time datetime="{{ Song.created|date('c') }}">{{ Song.created|date('g:i A F j, Y') }}</time></div>
+        <div class="date">Song most recently updated at <time datetime="{{ Song.updated|date('c') }}">{{ Song.updated|date('g:i A F j, Y') }}</time></div>
         <br>
         {% for Track in Song.Tracks %}
-            {{Track.name}}
+            <div id="trackTitle">
+                <h3> {{ Track.name }}, a {{Track.instrument}} track by {{Track.creator}}</h3>
+            </div>
+                    <div class="date">Originally published on <time datetime="{{ Track.created|date('c') }}">{{ Track.created|date('g:i A F j, Y') }}</time></div>
             <br>
+
+            <audio controls>
+
+            <source src="{{ asset(['uploads/tracks/', Track.id, '.', Track.path]|join) }}" type="audio/mpeg">
+            {#<source src="#" type="audio/ogg"> TODO ADD OGG SUPPORT also convert above to mp3 for legit #}
+            Your browser does not support the audio element.
+            </audio>
+
         {% else %}
             There are no Tracks in this song you goofball!
         {% endfor %}
