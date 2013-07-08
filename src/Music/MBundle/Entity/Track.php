@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
-class Document
+class Track
 {
     /**
      * @ORM\Id
@@ -23,6 +23,11 @@ class Document
      */
     public $name;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     */
+    public $instrument;
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */

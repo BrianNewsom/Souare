@@ -1,0 +1,27 @@
+{# src/Blogger/BlogBundle/Resouces/views/Blog/show.html.twig #}
+{% extends 'MusicMBundle::layout.html.twig' %}
+
+{% block title %}{{Track.name}} on Souare{% endblock %}
+
+{% block body %}
+    <article class="blog">
+        <header>
+            <h2> {{Track.name|upper}}, a <b>{{Track.instrument|upper}}</b> track on Souare </h1>
+        </header>
+        <audio controls>
+
+        <source src="{{ asset(['uploads/tracks/', Track.id, '.', Track.path]|join) }}" type="audio/mpeg">
+        {#<source src="#" type="audio/ogg"> TODO ADD OGG SUPPORT also convert above to mp3 for legit #}
+        Your browser does not support the audio element.
+        </audio>
+
+        {#
+            <div class="date"><time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('l, F j, Y') }}</time></div>
+            <h2>{{ blog.title }}</h2>
+        </header>
+        <img src="{{ asset(['images/', blog.image]|join) }}" alt="{{ blog.title }} image not found" class="large" />
+        <div>
+            <p>{{ blog.blog }}</p>
+        </div> #}
+    </article>
+{% endblock %}

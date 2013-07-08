@@ -80,7 +80,7 @@ fos_user:
     user_class: Music\MBundle\Entity\User
     registration:
         confirmation:
-            enabled: true
+            enabled: false
     from_email:
         address: SouareDevelop@gmail.com
         sender_name: Souare App
