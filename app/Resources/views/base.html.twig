@@ -49,7 +49,10 @@
 
             <div id="footer">
                 {% block footer %}
-                    Development of Souare or whatever it will be called. Please <b> <a href="{{ path('fos_user_security_login')}}">Login </a> </b> or <b> <a href="{{ path('fos_user_registration_register')}}">Register </a> </b> if you have not already! {# Only show if not logged in #}
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            Welcome, {{ app.user.username }}!
+                    {% else %} Please <b> <a href="{{ path('fos_user_security_login')}}">Login </a> </b> or <b> <a href="{{ path('fos_user_registration_register')}}">Register </a> </b> for the best experience! {# Only show if not logged in #}
+                    {% endif %}
                 {% endblock %}
             </div>
         </section>
