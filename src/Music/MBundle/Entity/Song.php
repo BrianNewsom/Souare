@@ -38,10 +38,11 @@ class Song
      */
     protected $owner;
     /**
-     * @ORM\Column(type="Track")
+     * @var array    
+     * @ORM\Column(type="array", length=1000, nullable=true)
      */
-    protected $tracks;
-    
+    protected $tracks;//USE PATH TO TRACKS
+
 
     public function __construct()
     {
@@ -154,13 +155,15 @@ class Song
         return $this->owner;
     }
 
+
+
     /**
      * Set tracks
      *
-     * @param \Track $tracks
+     * @param array $tracks
      * @return Song
      */
-    public function setTracks(\Track $tracks)
+    public function setTracks($tracks)
     {
         $this->tracks = $tracks;
     
@@ -168,23 +171,9 @@ class Song
     }
 
     /**
-     * Set tracks
-     *
-     * @param \Track $tracks
-     * @return Song
-     */
-    public function addTrack(\Track $tracks)
-    {
-        $this->tracks[] = $tracks;
-    
-        return $this;
-    }
-
-
-    /**
      * Get tracks
      *
-     * @return \Track 
+     * @return array 
      */
     public function getTracks()
     {

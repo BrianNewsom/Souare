@@ -4,6 +4,7 @@ namespace Music\MBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Music\MBundle\Entity\Track;
+use Music\MBundle\Entity\Song;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -65,6 +66,46 @@ class PageController extends Controller
 			'Track' => $Track,
 			));*/
 	    return $this->render('MusicMBundle:Page:addtrack.html.twig', array('form' => $form->createView()));
+	}
+
+	public function addSongAction(Request $request)
+	{
+		$Song = new Song();
+	    $form = $this->createFormBuilder($Song)
+	        ->add('title')
+	        ->getForm();
+       	$em = $this->getDoctrine()
+                   ->getManager();
+
+        $Tracks = $em->createQueryBuilder()
+                    ->select('b')
+                    ->from('MusicMBundle:Track',  'b')
+                    ->addOrderBy('b.created', 'DESC')
+                    ->getQuery()
+                    ->getResult();
+
+	    $Song->setTracks($Tracks);
+	    $form->handleRequest($request);
+	    if ($form->isValid()) {
+		    $em = $this->getDoctrine()->getManager();
+
+		    //$document->upload();
+		    $user = $this->getUser(); //Store who created the track
+		    $Song->setOwner($user);
+		    $em->persist($Song);
+		    $em->flush();
+		    
+		    return $this->render('MusicMBundle:Song:show.html.twig', array(
+        	    'Song'      => $Song,
+    	    ));
+		    //return $this->redirect($this->generateUrl('MusicMBundle_addtrack'));
+		}
+		/*return $this->render('MusicMBundle:Track:show.html.twig', array(
+			'form' => $form->createView(), 
+			'Track' => $Track,
+			));*/
+	    return $this->render('MusicMBundle:Page:addsong.html.twig', array('form' => $form->createView()));
+
 	}
 
 	public function contactAction()

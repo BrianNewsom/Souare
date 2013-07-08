@@ -28,3 +28,16 @@ MusicMBundle_Track_show:
     requirements:
         _method: GET
         id: \d+
+
+MusicMBundle_addsong:
+    pattern: /addsong
+    defaults: { _controller: MusicMBundle:Page:addsong }
+    requirements:
+        _method: GET|POST
+
+MusicMBundle_Song_show:
+    pattern: /song/{id}
+    defaults: { _controller: MusicMBundle:Song:show }
+    requirements:
+        _method: GET
+        id: \d+
