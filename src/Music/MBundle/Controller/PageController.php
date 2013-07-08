@@ -10,9 +10,25 @@ use Symfony\Component\HttpFoundation\Request;
 class PageController extends Controller
 {
 	public function indexAction()
+    {
+        $em = $this->getDoctrine()
+                   ->getManager();
+
+        $Tracks = $em->createQueryBuilder()
+                    ->select('b')
+                    ->from('MusicMBundle:Track',  'b')
+                    ->addOrderBy('b.created', 'DESC')
+                    ->getQuery()
+                    ->getResult();
+
+        return $this->render('MusicMBundle:Page:index.html.twig', array(
+            'Tracks' => $Tracks
+        ));
+    }
+	/*public function indexAction()
 	{
 		return $this->render('MusicMBundle:Page:index.html.twig');
-	}
+	}*/
 
 	public function chartsAction()
 	{
@@ -34,7 +50,8 @@ class PageController extends Controller
 		    $em = $this->getDoctrine()->getManager();
 
 		    //$document->upload();
-
+		    $user = $this->getUser(); //Store who created the track
+		    $Track->setCreator($user);
 		    $em->persist($Track);
 		    $em->flush();
 		    

@@ -22,7 +22,7 @@ MusicMBundle_contact:
     requirements:
         _method: GET
 
-MusicMBundle_show:
+MusicMBundle_Track_show:
     pattern: /track/{id}
     defaults: { _controller: MusicMBundle:Track:show }
     requirements:

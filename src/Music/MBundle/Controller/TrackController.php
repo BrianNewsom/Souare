@@ -17,7 +17,6 @@ class TrackController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $Track = $em->getRepository('MusicMBundle:Track')->find($id);
-
         if (!$Track) {
             throw $this->createNotFoundException('Unable to find Track');
         }

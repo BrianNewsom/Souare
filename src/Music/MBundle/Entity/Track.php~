@@ -4,7 +4,6 @@ namespace Music\MBundle\Entity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Music\MBundle\Entity\User;
 /**
  * @ORM\Entity
  * @ORM\Table(name="track")
@@ -53,8 +52,6 @@ class Track
     {
         $this->setCreated(new \DateTime());
         $this->setUpdated(new \DateTime());
-     //   $this->SetCreator();
-
     }
 
     /**
@@ -308,28 +305,5 @@ class Track
     public function getUpdated()
     {
         return $this->updated;
-    }
-
-    /**
-     * Set creator
-     *
-     * @param string $creator
-     * @return Track
-     */
-    public function setCreator($creator)
-    {
-        $this->creator = $creator;
-    
-        return $this;
-    }
-
-    /**
-     * Get creator
-     *
-     * @return string 
-     */
-    public function getCreator()
-    {
-        return $this->creator;
     }
 }
