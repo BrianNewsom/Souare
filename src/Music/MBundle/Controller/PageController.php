@@ -21,7 +21,6 @@ class PageController extends Controller
                     ->addOrderBy('b.created', 'DESC')
                     ->getQuery()
                     ->getResult();
-
         return $this->render('MusicMBundle:Page:index.html.twig', array(
             'Tracks' => $Tracks
         ));
@@ -53,6 +52,7 @@ class PageController extends Controller
 		    //$document->upload();
 		    $user = $this->getUser(); //Store who created the track
 		    $Track->setCreator($user);
+
 		    $em->persist($Track);
 		    $em->flush();
 		    
@@ -92,6 +92,7 @@ class PageController extends Controller
 		    //$document->upload();
 		    $user = $this->getUser(); //Store who created the track
 		    $Song->setOwner($user);
+			$user->addSong($Song);
 		    $em->persist($Song);
 		    $em->flush();
 		    
