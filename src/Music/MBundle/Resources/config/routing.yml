@@ -41,3 +41,9 @@ MusicMBundle_Song_show:
     requirements:
         _method: GET
         id: \d+
+
+MusicMBundle_Profile_show:
+    pattern: /profiles/{slug}
+    defaults: { _controller: MusicMBundle:Profile:show }
+    requirements:
+        _method: GET

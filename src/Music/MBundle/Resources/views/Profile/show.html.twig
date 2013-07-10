@@ -1,0 +1,21 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+	{% include "FOSUserBundle:Profile:show_content.html.twig" %}
+	{# Delete beyond here to return to original #}
+	{% block userSongs %}
+		<h1> {{user.username}}'s Songs </h1>
+        {% for Song in user.Songs %}
+        	<a href="{{path('MusicMBundle_Song_show',{'id': Song.id })}}">
+        		{{Song.title}}
+        		</a> 
+        		<br>
+        {% else %}
+        	This user has not created any songs! Bummer!
+        {% endfor %}
+
+
+
+
+	{% endblock %}
+{% endblock fos_user_content %}
