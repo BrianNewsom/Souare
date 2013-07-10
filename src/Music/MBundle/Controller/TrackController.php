@@ -3,7 +3,7 @@
 namespace Music\MBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Music\MBundle\Entity\Track;
 /**
  * Track controller.
  */
@@ -20,6 +20,10 @@ class TrackController extends Controller
         if (!$Track) {
             throw $this->createNotFoundException('Unable to find Track');
         }
+        $Track = new Track();
+        $form = $this->createFormBuilder($Track)
+            ->add('name')
+            ->getForm();
 
         return $this->render('MusicMBundle:Track:show.html.twig', array(
             'Track'      => $Track,

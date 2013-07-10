@@ -9,7 +9,7 @@ use Acme\DemoBundle\Form\ContactType;
 // these import the "@Route" and "@Template" annotations
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-
+/* Brian Was here on Google Drive TEST */
 class DemoController extends Controller
 {
     /**
@@ -20,7 +20,10 @@ class DemoController extends Controller
     {
         return array();
     }
-
+	public function testAction()
+	{
+		return array();
+	}
     /**
      * @Route("/hello/{name}", name="_demo_hello")
      * @Template()

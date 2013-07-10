@@ -332,4 +332,9 @@ class Track
     {
         return $this->creator;
     }
+
+    public function addToSong()
+    {
+        return;
+    }
 }

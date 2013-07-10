@@ -21,7 +21,7 @@ class ProfileController extends Controller
             throw $this->createNotFoundException('Unable to find specified Profile');
         }
 
-        return $this->render('MusicMBundle:Profile:show.html.twig', array(
+        return $this->render('FOSUserBundle:Profile:show.html.twig'/*'MusicMBundle:Profile:show.html.twig'*/, array(
             'user'      => $user,
         ));
     }
