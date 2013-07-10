@@ -12,6 +12,16 @@ class PageController extends Controller
 {
 	public function indexAction()
     {
+
+        return $this->render('MusicMBundle:Page:index.html.twig');
+    }
+	/*public function indexAction()
+	{
+		return $this->render('MusicMBundle:Page:index.html.twig');
+	}*/
+
+	public function chartsAction()
+	{
         $em = $this->getDoctrine()
                    ->getManager();
 
@@ -21,18 +31,9 @@ class PageController extends Controller
                     ->addOrderBy('b.created', 'DESC')
                     ->getQuery()
                     ->getResult();
-        return $this->render('MusicMBundle:Page:index.html.twig', array(
+        return $this->render('MusicMBundle:Page:charts.html.twig', array(
             'Tracks' => $Tracks
         ));
-    }
-	/*public function indexAction()
-	{
-		return $this->render('MusicMBundle:Page:index.html.twig');
-	}*/
-
-	public function chartsAction()
-	{
-		return $this->render('MusicMBundle:Page:charts.html.twig');
 	}
 
 	public function addTrackAction(Request $request)
