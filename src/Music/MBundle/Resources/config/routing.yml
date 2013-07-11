@@ -47,3 +47,10 @@ MusicMBundle_Profile_show:
     defaults: { _controller: MusicMBundle:Profile:show }
     requirements:
         _method: GET
+
+MusicMBundle_addTrackToSong:
+    pattern: /addTrackToSong/{id}
+    defaults: { _controller: MusicMBundle:Song:addTrackToSong }
+    requirements:
+       _method: GET
+       id: \d+

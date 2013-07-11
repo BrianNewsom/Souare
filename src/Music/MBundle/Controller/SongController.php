@@ -26,6 +26,18 @@ class SongController extends Controller
         ));
     }
 
+    public function addTrackToSongAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
 
+        $Track = $em->getRepository('MusicMBundle:Track')->find($id);
+        if (!$Track) {
+            throw $this->createNotFoundException('Unable to find specified Track');
+        }
+        //Create a form that lists all songs owned by this user, allow user to select, then add track to that song (Put that logic in model)!
+
+        //If user wants to create a new song, for now send them to the addSong route
+
+    }
 
 }

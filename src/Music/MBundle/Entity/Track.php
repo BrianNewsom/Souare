@@ -333,7 +333,7 @@ class Track
         return $this->creator;
     }
 
-    public function addToSong()
+    public function addToSong() //Write function
     {
         return;
     }

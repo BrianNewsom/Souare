@@ -19,7 +19,7 @@
         Your browser does not support the audio element.
         </audio>
         <div id="addToSong"> {#float this #}
-                    <input type="submit" value="Add to a Song" onclick="{{Track.addToSong()}}"/>
+                    <input type="submit" value="Add to a Song" onclick="{{path ('MusicMBundle_addTrackToSong',{'id': Track.id })}}"/>
         </div>
         {#
             <div class="date"><time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('l, F j, Y') }}</time></div>
