@@ -4,6 +4,7 @@ namespace Music\MBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Music\MBundle\Entity\Track;
+use Symfony\Component\HttpFoundation\Request;
 /**
  * Track controller.
  */
@@ -12,7 +13,7 @@ class TrackController extends Controller
     /**
      * Show a blog entry
      */
-    public function showAction($id)
+    public function showAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -20,11 +21,6 @@ class TrackController extends Controller
         if (!$Track) {
             throw $this->createNotFoundException('Unable to find Track');
         }
-        $Track = new Track();
-        $form = $this->createFormBuilder($Track)
-            ->add('name')
-            ->getForm();
-
         return $this->render('MusicMBundle:Track:show.html.twig', array(
             'Track'      => $Track,
         ));

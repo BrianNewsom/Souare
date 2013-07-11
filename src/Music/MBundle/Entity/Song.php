@@ -179,4 +179,17 @@ class Song
     {
         return $this->tracks;
     }
+
+    /**
+     * Set songs
+     *
+     * @param array $songs
+     * @return User
+     */
+    public function addTrack($track)
+    {
+        $this->tracks[] = $track;
+    
+        return $this;
+    }
 }
