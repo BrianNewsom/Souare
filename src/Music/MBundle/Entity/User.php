@@ -84,11 +84,12 @@ class User extends BaseUser
      */
     public function songArray()
     {
-        $returnArray = NULL;
+        $returnArray[NULL] = '';
         foreach ($this->songs as $song)
         {
             $title = $song->getTitle();
-            $returnArray[$song] = $title;
+            $id = $song->getId();
+            $returnArray[$id] = $title;
         }
         return $returnArray;
     }

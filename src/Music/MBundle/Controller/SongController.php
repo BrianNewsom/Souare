@@ -32,26 +32,32 @@ class SongController extends Controller
     public function addTrackToSongAction($Track, Request $request)
     {
         $user = $this->container->get('security.context')->getToken()->getUser();
-        $Songs = $user->getSongs();
         $form = $this->createFormBuilder($Track)  /*# Add track to song button #}*/
-            ->add('tempdata', 'choice', array('choices' => $user->songArray()))//array('m' => 'Male', 'f' => 'Female')))
+            ->add('tempdata', 'choice', array('choices' => $user->songArray()))//array('m' => 'Male', 'f' => 'Female'))) //$user->songArray()))//
+            ->add('name') //so it won't autosubmit :(
             ->add('Add To My Song', 'submit')
             ->getForm();
         $form->handleRequest($request);
         
         if ($form->isValid()) {
-                //$response = $this->forward('MusicMBundle:Song:addtracktosong', array(
-                    //'id'  => $Track->getId(),
-                //    'Track' => $Track,
-                //));
-                //return $response;
-            //return $this->render('MusicMBundle:Page:addtracktosong.html.twig', array(
-            //    'Track' => $Track,
-            //));
-        } /*on valid click move to addtrack twig */
+            /*
+            $em = $this->getDoctrine()->getManager();
+
+            $temp = $Track->getTempdata();
+            $Song = $em->getRepository('MusicMBundle:Song')->find($temp);
+
+            $em->persist($Track);
+
+            $em->flush();
+            //var_dump($Track);
+            return $this->render('MusicMBundle:Page:index.html.twig');
+            //return $this->render('MusicMBundle:Track:show.html.twig', array(
+            //    'Track'      => $Track,
+            //));*/
+        }
 
         return $this->render('MusicMBundle:Song:addtracktosong.html.twig', array(
-            'Track' => $Track, 'form' => $form->createView(),
+            'Track' => $Track, 'form' => $form->createView(), 'userTest' => $user,
             ));
 
         /*
