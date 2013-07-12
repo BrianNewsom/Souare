@@ -3,7 +3,7 @@
 namespace Music\MBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Symfony\Component\HttpFoundation\Response;
 /**
  * Song controller.
  */
@@ -28,10 +28,11 @@ class SongController extends Controller
 
     }
 
-    public function addTrackToSongAction()
+    public function addTrackToSongAction($Track)
     {
-
-        return new Response('<html><body>Hello '.$id.'!</body></html>');
+        return $this->render('MusicMBundle:Song:addtracktosong.html.twig', array(
+            'Track' => $Track
+            ));
         /*
         $em = $this->getDoctrine()->getManager();
 

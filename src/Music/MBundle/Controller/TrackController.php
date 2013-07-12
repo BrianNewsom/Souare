@@ -23,14 +23,19 @@ class TrackController extends Controller
         }
 
         $form = $this->createFormBuilder($Track)  /*# Add track to song button #}*/
-            ->add('save', 'submit')
+            ->add('Add To My Song', 'submit')
             ->getForm();
         $form->handleRequest($request);
         
         if ($form->isValid()) {
-            return $this->render('MusicMBundle:Page:addtracktosong.html.twig', array(
-                'Track' => $Track,
-            ));
+                $response = $this->forward('MusicMBundle:Song:addtracktosong', array(
+                    //'id'  => $Track->getId(),
+                    'Track' => $Track,
+                ));
+                return $response;
+            //return $this->render('MusicMBundle:Page:addtracktosong.html.twig', array(
+            //    'Track' => $Track,
+            //));
         } /*on valid click move to addtrack twig */
 
         return $this->render('MusicMBundle:Track:show.html.twig', array(
