@@ -18,6 +18,9 @@
         {#<source src="#" type="audio/ogg"> TODO ADD OGG SUPPORT also convert above to mp3 for legit #}
         Your browser does not support the audio element.
         </audio>
+        <div id="addToSongBut">
+            {{ form(form) }}
+        </div>
         {#
             <div class="date"><time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('l, F j, Y') }}</time></div>
             <h2>{{ blog.title }}</h2>

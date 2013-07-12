@@ -26,7 +26,7 @@ MusicMBundle_Track_show:
     pattern: /track/{id}
     defaults: { _controller: MusicMBundle:Track:show }
     requirements:
-        _method: GET
+        _method: GET|POST
         id: \d+
 
 MusicMBundle_addsong:

@@ -21,8 +21,20 @@ class TrackController extends Controller
         if (!$Track) {
             throw $this->createNotFoundException('Unable to find Track');
         }
+
+        $form = $this->createFormBuilder($Track)  /*# Add track to song button #}*/
+            ->add('save', 'submit')
+            ->getForm();
+        $form->handleRequest($request);
+        
+        if ($form->isValid()) {
+            return $this->render('MusicMBundle:Page:addtracktosong.html.twig', array(
+                'Track' => $Track,
+            ));
+        } /*on valid click move to addtrack twig */
+
         return $this->render('MusicMBundle:Track:show.html.twig', array(
-            'Track'      => $Track,
+            'Track'      => $Track, 'form' => $form->createView(),
         ));
     }
 
