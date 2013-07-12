@@ -77,4 +77,20 @@ class User extends BaseUser
     {
         return $this->songs;
     }
+    /**
+     * Get songs
+     *
+     * @return array 
+     */
+    public function songArray()
+    {
+        $returnArray = NULL;
+        foreach ($this->songs as $song)
+        {
+            $title = $song->getTitle();
+            $returnArray[$song] = $title;
+        }
+        return $returnArray;
+    }
+
 }

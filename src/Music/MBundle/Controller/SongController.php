@@ -4,6 +4,7 @@ namespace Music\MBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 /**
  * Song controller.
  */
@@ -28,11 +29,31 @@ class SongController extends Controller
 
     }
 
-    public function addTrackToSongAction($Track)
+    public function addTrackToSongAction($Track, Request $request)
     {
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $Songs = $user->getSongs();
+        $form = $this->createFormBuilder($Track)  /*# Add track to song button #}*/
+            ->add('tempdata', 'choice', array('choices' => $user->songArray()))//array('m' => 'Male', 'f' => 'Female')))
+            ->add('Add To My Song', 'submit')
+            ->getForm();
+        $form->handleRequest($request);
+        
+        if ($form->isValid()) {
+                //$response = $this->forward('MusicMBundle:Song:addtracktosong', array(
+                    //'id'  => $Track->getId(),
+                //    'Track' => $Track,
+                //));
+                //return $response;
+            //return $this->render('MusicMBundle:Page:addtracktosong.html.twig', array(
+            //    'Track' => $Track,
+            //));
+        } /*on valid click move to addtrack twig */
+
         return $this->render('MusicMBundle:Song:addtracktosong.html.twig', array(
-            'Track' => $Track
+            'Track' => $Track, 'form' => $form->createView(),
             ));
+
         /*
         $em = $this->getDoctrine()->getManager();
 

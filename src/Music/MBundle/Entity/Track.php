@@ -49,6 +49,11 @@ class Track
      */
     protected $creator;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $tempdata;
+
     public function __construct()
     {
         $this->setCreated(new \DateTime());
@@ -336,5 +341,28 @@ class Track
     public function addToSong() //Write function
     {
         return;
+    }
+
+    /**
+     * Set tempdata
+     *
+     * @param string $tempdata
+     * @return Track
+     */
+    public function setTempdata($tempdata)
+    {
+        $this->tempdata = $tempdata;
+    
+        return $this;
+    }
+
+    /**
+     * Get tempdata
+     *
+     * @return string 
+     */
+    public function getTempdata()
+    {
+        return $this->tempdata;
     }
 }
