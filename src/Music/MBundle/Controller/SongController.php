@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Music\MBundle\Entity\Task;
+use Music\MBundle\Entity\Track;
 /**
  * Song controller.
  */
@@ -30,26 +31,29 @@ class SongController extends Controller
 
     }
 
-    public function addTrackToSongAction($Track, Request $request)
+    public function addTrackToSongAction( Request $request, $Track)
     {
+        $Track = $trackPassed;
         $user = $this->container->get('security.context')->getToken()->getUser();
         $task = new Task();
         $form = $this->createFormBuilder($task)  /*# Add track to song button #}*/
-            ->add('data', 'choice', array('empty_value' => 'Choose an option','choices' => $user->songArray()))//array('m' => 'Male', 'f' => 'Female'))) //$user->songArray()))//
+            //->add('data')
+            ->add('data', 'choice', array('choices' => $user->songArray()))//array('m' => 'Male', 'f' => 'Female'))) //$user->songArray()))//
             //->add('name') //so it won't autosubmit :(
-            ->add('Add To My Song', 'submit')
             ->getForm();
         $form->submit($request);//handleRequest($request);       
-
+        var_dump($Track);
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             //$em->persist($task);
-            $data = $task->getData();
-            $songId = $data['Song'];
-            var_dump($songId);
+            //$data = $task->getData();
+            $data = $form->getData();
+            var_dump($data);
+            //$songId = $data['Song'];
+           // var_dump($songId);
             $Song = $this->getDoctrine()
                 ->getRepository('MusicMBundle:Song')
-                ->find($songId);
+                ->find(1);
             $Song->addTrack($Track);
             $em->persist($Song);
             $em->flush();
