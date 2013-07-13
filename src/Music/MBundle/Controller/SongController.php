@@ -31,11 +31,11 @@ class SongController extends Controller
 
     }
 
-    public function addTrackToSongAction(Request $request, $Track)
+    public function addTrackToSongAction($id, Request $request)
     {
         $user = $this->container->get('security.context')->getToken()->getUser();
         $task = new Task();
-        var_dump($Track);
+        //var_dump($Track);
         $form = $this->createFormBuilder($task)  /*# Add track to song button #}*/
             //->add('data')
             ->add('data', 'choice', array('choices' => $user->songArray()))//array('m' => 'Male', 'f' => 'Female'))) //$user->songArray()))//
@@ -44,7 +44,7 @@ class SongController extends Controller
         $form->handleRequest($request);       
         //var_dump($Track);
         if ($form->isValid()) {   
-            $em = $this->getDoctrine()->getManager();
+            //$em = $this->getDoctrine()->getManager();
             //$em->persist($task);
             $songId = $task->getData();
             //$data = $form->getData();
@@ -56,16 +56,21 @@ class SongController extends Controller
                 ->find($songId);
             $old = $Song->getTracks();
             $old[] = $Track;
-            $Song->setTracks($old);
+            var_dump($Track);
 
+            $Song->setTracks($old);
+            var_dump($Song->getTracks());
             //$Song->addTrack($Track);
             $em->persist($Song);
             $em->flush();
-            return $this->redirect($this->generateUrl('MusicMBundle_homepage'));
+            $response = $this->forward('MusicMBundle:Page:index');
+            return $response;
+
+            //return $this->redirect($this->generateUrl('MusicMBundle_homepage'));
         }
 
         return $this->render('MusicMBundle:Song:addtracktosong.html.twig', array(
-            'Track' => $Track, 'form' => $form->createView(),
+            'id' => $id, 'form' => $form->createView(),
             ));
 
         /*

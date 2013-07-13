@@ -26,13 +26,17 @@ class TrackController extends Controller
             ->add('Add To My Song', 'submit')
             ->getForm();
         $form->handleRequest($request);
-        var_dump($Track);
+        //var_dump($Track);
         if ($form->isValid()) {
-                $response = $this->forward('MusicMBundle:Song:addTrackToSong', array(
+            return $this->render('MusicMBundle:Song:addtracktosong.html.twig', array(
+                'id'      => $Track->getId(), 
+            ));
+
+                /*$response = $this->forward('MusicMBundle:Song:addTrackToSong', array(
                     //'id'  => $Track->getId(),
                     'Track' => $Track,
                 ));
-                return $response;
+                return $response;*/
             //return $this->render('MusicMBundle:Page:addtracktosong.html.twig', array(
             //    'Track' => $Track,
             //));
