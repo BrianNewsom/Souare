@@ -31,7 +31,7 @@ class SongController extends Controller
 
     }
 
-    public function addTrackToSongAction($id, Request $request)
+    public function addTrackToSongAction(Request $request, $Track)
     {
         $user = $this->container->get('security.context')->getToken()->getUser();
         $task = new Task();
@@ -44,7 +44,7 @@ class SongController extends Controller
         $form->handleRequest($request);       
         //var_dump($Track);
         if ($form->isValid()) {   
-            //$em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getManager();
             //$em->persist($task);
             $songId = $task->getData();
             //$data = $form->getData();
@@ -58,19 +58,18 @@ class SongController extends Controller
             $old[] = $Track;
             var_dump($Track);
 
-            $Song->setTracks($old);
-            var_dump($Song->getTracks());
+            //$Song->setTracks($old);
+            //var_dump($Song->getTracks());
             //$Song->addTrack($Track);
             $em->persist($Song);
             $em->flush();
-            $response = $this->forward('MusicMBundle:Page:index');
-            return $response;
+           return $this->redirect($this->generateUrl('MusicMBundle_homepage'));
 
             //return $this->redirect($this->generateUrl('MusicMBundle_homepage'));
         }
 
         return $this->render('MusicMBundle:Song:addtracktosong.html.twig', array(
-            'id' => $id, 'form' => $form->createView(),
+            'Track' => $Track, 'form' => $form->createView(),
             ));
 
         /*
