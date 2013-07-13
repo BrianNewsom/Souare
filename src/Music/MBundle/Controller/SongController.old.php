@@ -5,7 +5,6 @@ namespace Music\MBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Music\MBundle\Entity\Task;
 /**
  * Song controller.
  */
@@ -33,28 +32,23 @@ class SongController extends Controller
     public function addTrackToSongAction($Track, Request $request)
     {
         $user = $this->container->get('security.context')->getToken()->getUser();
-        $task = new Task();
-        $form = $this->createFormBuilder($task)  /*# Add track to song button #}*/
-            ->add('data', 'choice', array('empty_value' => 'Choose an option','choices' => $user->songArray()))//array('m' => 'Male', 'f' => 'Female'))) //$user->songArray()))//
-            //->add('name') //so it won't autosubmit :(
+        $Songs = $user->getSongs();
+        $form = $this->createFormBuilder($Track)  /*# Add track to song button #}*/
+            ->add('name', 'choice', array('choices' => array('m' => 'Male', 'f' => 'Female')))
             ->add('Add To My Song', 'submit')
             ->getForm();
-        $form->submit($request);//handleRequest($request);       
-
+        $form->handleRequest($request);
+        
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            //$em->persist($task);
-            $data = $task->getData();
-            $songId = $data['Song'];
-            var_dump($songId);
-            $Song = $this->getDoctrine()
-                ->getRepository('MusicMBundle:Song')
-                ->find($songId);
-            $Song->addTrack($Track);
-            $em->persist($Song);
-            $em->flush();
-            return $this->redirect($this->generateUrl('MusicMBundle_homepage'));
-        }
+                //$response = $this->forward('MusicMBundle:Song:addtracktosong', array(
+                    //'id'  => $Track->getId(),
+                //    'Track' => $Track,
+                //));
+                //return $response;
+            //return $this->render('MusicMBundle:Page:addtracktosong.html.twig', array(
+            //    'Track' => $Track,
+            //));
+        } /*on valid click move to addtrack twig */
 
         return $this->render('MusicMBundle:Song:addtracktosong.html.twig', array(
             'Track' => $Track, 'form' => $form->createView(),

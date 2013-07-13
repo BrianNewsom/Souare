@@ -53,7 +53,7 @@ class PageController extends Controller
 		    //$document->upload();
 		    $user = $this->getUser(); //Store who created the track
 		    $Track->setCreator($user);
-
+		   // var_dump($user);
 		    $em->persist($Track);
 		    $em->flush();
 		    

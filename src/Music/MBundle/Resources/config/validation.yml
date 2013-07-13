@@ -3,3 +3,4 @@ Music\MBundle\Entity\Document:
         file:
             - File:
                 maxSize: 60000000
+
