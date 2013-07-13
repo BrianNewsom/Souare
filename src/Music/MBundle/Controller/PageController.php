@@ -84,7 +84,7 @@ class PageController extends Controller
                     ->addOrderBy('b.created', 'DESC')
                     ->getQuery()
                     ->getResult();
-
+        var_dump($Tracks);
 	    $Song->setTracks($Tracks);
 	    $form->handleRequest($request);
 	    if ($form->isValid()) {

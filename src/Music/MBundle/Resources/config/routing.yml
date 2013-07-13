@@ -50,7 +50,7 @@ MusicMBundle_Profile_show:
 
 MusicMBundle_Song_addTrackToSong:
     pattern: /addTrackToSong
-    defaults: { _controller: MusicMBundle:Song:addTrackToSong }
+    defaults: { _controller: MusicMBundle:Song:addTrackToSong, Track: Track }
     requirements:
        _method: GET|POST
        

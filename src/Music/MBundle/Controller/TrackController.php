@@ -26,7 +26,7 @@ class TrackController extends Controller
             ->add('Add To My Song', 'submit')
             ->getForm();
         $form->handleRequest($request);
-        
+        var_dump($Track);
         if ($form->isValid()) {
                 $response = $this->forward('MusicMBundle:Song:addTrackToSong', array(
                     //'id'  => $Track->getId(),

@@ -21,7 +21,7 @@ class Task
      */
     protected $id;
     /**
-     * @ORM\Column(type="integer", length=255)
+     * @ORM\Column(type="array", length=255)
      * @Assert\NotBlank
      */
     protected $data;
