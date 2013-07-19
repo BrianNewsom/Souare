@@ -5,6 +5,7 @@ namespace Music\MBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Music\MBundle\Entity\Track;
 use Symfony\Component\HttpFoundation\Request;
+use Music\MBundle\Entity\Task;
 /**
  * Track controller.
  */
@@ -15,12 +16,7 @@ class TrackController extends Controller
      */
     public function showAction($id, Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $Track = $em->getRepository('MusicMBundle:Track')->find($id);
-        if (!$Track) {
-            throw $this->createNotFoundException('Unable to find Track');
-        }
+        $Track = $this->getTrack($id);
 
         $form = $this->createFormBuilder($Track)  /*# Add track to song button #}*/
             ->add('Add To My Song', 'submit')
@@ -28,11 +24,9 @@ class TrackController extends Controller
         $form->handleRequest($request);
         //var_dump($Track);
         if ($form->isValid()) {
-             $response = $this->forward('MusicMBundle:Song:addTrackToSong', array(
-                'Track'=>$Track,
-                ));
-             return $response;
-
+            return $this->redirect($this->generateUrl('MusicMBundle_Track_addTrackToSong', array(
+                'id' => $id,
+            )));
                 /*$response = $this->forward('MusicMBundle:Song:addTrackToSong', array(
                     //'id'  => $Track->getId(),
                     'Track' => $Track,
@@ -46,6 +40,63 @@ class TrackController extends Controller
         return $this->render('MusicMBundle:Track:show.html.twig', array(
             'Track'      => $Track, 'form' => $form->createView(),
         ));
+    }
+
+    public function addTrackToSongAction($id, Request $request)
+    {
+        $Track = $this->getTrack($id);
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        $task = new Task();
+        //var_dump($Track);
+        $form = $this->createFormBuilder($task)  /*# Add track to song button #}*/
+            //->add('data')
+            ->add('data', 'choice', array('choices' => $user->songArray()))//array('m' => 'Male', 'f' => 'Female'))) //$user->songArray()))//
+            //->add('name') //so it won't autosubmit :(
+            ->getForm();
+        $form->handleRequest($request);       
+        //var_dump($Track);
+        if ($form->isValid()) {   
+            $em = $this->getDoctrine()->getManager();
+            //$em->persist($task);
+            $songId = $task->getData();
+            //$data = $form->getData();
+            //var_dump($data);
+            //$songArray = $task->getData();
+            //var_dump($songId);
+            $Song = $this->getDoctrine()
+                ->getRepository('MusicMBundle:Song')
+                ->find($songId);
+            //$old = $Song->getTracks();
+            //$old[] = $Track;
+
+            //var_dump($old);
+            $Song->addTrack($Track);
+            //var_dump($Song->getTracks());
+            //$Song->addTrack($Track);
+            $em->persist($Song);
+            $em->flush();
+            return $this->redirect($this->generateUrl('MusicMBundle_homepage'));
+
+            //return $this->redirect($this->generateUrl('MusicMBundle_homepage'));
+        }
+        
+        return $this->render('MusicMBundle:Track:addtracktosong.html.twig', array(
+            'Track' => $Track, 'form' => $form->createView(),
+            ));
+    }
+
+    protected function getTrack($id)
+    {
+        $em = $this->getDoctrine()
+                    ->getManager();
+
+        $Track = $em->getRepository('MusicMBundle:Track')->find($id);
+
+        if (!$Track) {
+            throw $this->createNotFoundException('Unable to find Track.');
+        }
+
+        return $Track;
     }
 
 

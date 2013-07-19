@@ -48,10 +48,9 @@ MusicMBundle_Profile_show:
     requirements:
         _method: GET
 
-MusicMBundle_Song_addTrackToSong:
-    pattern: /addTrackToSong
-    defaults: { _controller: MusicMBundle:Song:addTrackToSong }
+MusicMBundle_Track_addTrackToSong:
+    pattern: /addTrackToSong/{id}
+    defaults: { _controller: MusicMBundle:Track:addTrackToSong }
     requirements:
-       _method: GET|POST
-
-       
+        _method: GET|POST
+        id: \d+
