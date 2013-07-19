@@ -35,6 +35,13 @@ MusicMBundle_addsong:
     requirements:
         _method: GET|POST
 
+MusicMBundle_addSongFromTrack:
+    pattern: /addsongFromTrack/{id}
+    defaults: { _controller: MusicMBundle:Page:addSongFromTrack }
+    requirements:
+        _method: GET|POST
+        id: \d+
+
 MusicMBundle_Song_show:
     pattern: /song/{id}
     defaults: { _controller: MusicMBundle:Song:show }

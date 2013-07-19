@@ -4,17 +4,18 @@
 
 {% block body %}
     <header>
-        <h1>Add this track to your own song!</h1>
+        <h1>Upload your own Song</h1>
     </header>
 
-    <form action="{{ path('MusicMBundle_Track_addTrackToSong',{'id': Track.id}) }}" method="post" {{ form_enctype(form) }} class="blogger">
+    <form action="{{ path('MusicMBundle_addSongFromTrack', {'id': id}) }}" method="post" {{ form_enctype(form) }} class="blogger">
         {{ form_errors(form) }}
 
-        {{ form_row(form.Song) }}
+        {{ form_row(form.title) }}
+        
 
         {{ form_rest(form) }}
 
         <input type="submit" value="Submit" />
     </form>
-   
+
 {% endblock %}

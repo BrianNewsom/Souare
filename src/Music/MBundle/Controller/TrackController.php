@@ -12,7 +12,7 @@ use Music\MBundle\Entity\Task;
 class TrackController extends Controller
 {
     /**
-     * Show a blog entry
+     * Show a Track
      */
     public function showAction($id, Request $request)
     {
@@ -27,15 +27,8 @@ class TrackController extends Controller
             return $this->redirect($this->generateUrl('MusicMBundle_Track_addTrackToSong', array(
                 'id' => $id,
             )));
-                /*$response = $this->forward('MusicMBundle:Song:addTrackToSong', array(
-                    //'id'  => $Track->getId(),
-                    'Track' => $Track,
-                ));
-                return $response;*/
-            //return $this->render('MusicMBundle:Page:addtracktosong.html.twig', array(
-            //    'Track' => $Track,
-            //));
-        } /*on valid click move to addtrack twig */
+
+        } 
 
         return $this->render('MusicMBundle:Track:show.html.twig', array(
             'Track'      => $Track, 'form' => $form->createView(),
@@ -49,33 +42,29 @@ class TrackController extends Controller
         $task = new Task();
         //var_dump($Track);
         $form = $this->createFormBuilder($task)  /*# Add track to song button #}*/
-            //->add('data')
-            ->add('data', 'choice', array('choices' => $user->songArray()))//array('m' => 'Male', 'f' => 'Female'))) //$user->songArray()))//
-            //->add('name') //so it won't autosubmit :(
+
+            ->add('Song', 'choice', array('choices' => $user->songArray()))
+
             ->getForm();
         $form->handleRequest($request);       
         //var_dump($Track);
         if ($form->isValid()) {   
             $em = $this->getDoctrine()->getManager();
-            //$em->persist($task);
-            $songId = $task->getData();
-            //$data = $form->getData();
-            //var_dump($data);
-            //$songArray = $task->getData();
-            //var_dump($songId);
+
+            $songId = $task->getSong();
+            if ($songId == 'new')
+            {
+                return $this->redirect($this->generateUrl('MusicMBundle_addSongFromTrack', array('id' => $id)));                
+            }
             $Song = $this->getDoctrine()
                 ->getRepository('MusicMBundle:Song')
                 ->find($songId);
-            //$old = $Song->getTracks();
-            //$old[] = $Track;
 
-            //var_dump($old);
             $Song->addTrack($Track);
-            //var_dump($Song->getTracks());
-            //$Song->addTrack($Track);
+
             $em->persist($Song);
             $em->flush();
-            return $this->redirect($this->generateUrl('MusicMBundle_homepage'));
+            return $this->redirect($this->generateUrl('MusicMBundle_Song_show', array('id' => $songId)));
 
             //return $this->redirect($this->generateUrl('MusicMBundle_homepage'));
         }

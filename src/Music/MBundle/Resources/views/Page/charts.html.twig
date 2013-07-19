@@ -7,8 +7,9 @@
             <header>
                 <h2><a href="{{ path('MusicMBundle_Track_show', { 'id': Track.id }) }}">{{ Track.name }}</a>, a {{Track.instrument}} track by <a href="{{ path('MusicMBundle_Profile_show', { 'slug': Track.creator }) }}">{{Track.creator}}</a></h2>
             </header>
+            
             <hr>
-{#
+{#          
             <img src="{{ asset(['images/', blog.image]|join) }}" />
             <div class="snippet">
                 <p>{{ blog.blog(500) }}</p>

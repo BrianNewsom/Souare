@@ -31,6 +31,7 @@ class PageController extends Controller
                     ->addOrderBy('b.created', 'DESC')
                     ->getQuery()
                     ->getResult();
+
         return $this->render('MusicMBundle:Page:charts.html.twig', array(
             'Tracks' => $Tracks
         ));
@@ -109,6 +110,36 @@ class PageController extends Controller
 	    return $this->render('MusicMBundle:Page:addsong.html.twig', array('form' => $form->createView()));
 
 	}
+
+		public function addSongFromTrackAction(Request $request, $id)
+	{
+			$em = $this->getDoctrine()->getManager();
+			$Song = new Song();
+        	$Track = $em->getRepository('MusicMBundle:Track')->find($id);
+        	if (!$Track) {
+            	throw $this->createNotFoundException('Unable to find Track.');
+        	}
+        	$form = $this->createFormBuilder($Song)
+	        	->add('title')
+	        	->getForm();
+
+		    $form->handleRequest($request);
+	    	if ($form->isValid()) {
+				$Song->addTrack($Track);
+				$user = $this->getUser();
+			    $Song->setOwner($user);
+			    $user->addSong($Song);
+				$em->persist($Song);
+
+				$em->flush();
+			    return $this->render('MusicMBundle:Song:show.html.twig', array(
+	        	    'Song'      => $Song,
+	    	    ));
+			}
+	    return $this->render('MusicMBundle:Page:addsongfromtrack.html.twig', array('form' => $form->createView(), 'id' => $id));
+		    //return $this->redirect($this->generateUrl('MusicMBundle_addtrack'));
+	}
+
 
 	public function contactAction()
 	{
