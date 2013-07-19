@@ -147,8 +147,20 @@ class PageController extends Controller
 
 	public function sidebarAction()
 	{
+		$em = $this->getDoctrine()
+				   ->getManager();
 
-		return $this->render('MusicMBundle:Page:sidebar.html.twig');
+		$Songs = $em->createQueryBuilder()
+					->select('b')
+					->from('MusicMBundle:Song',  'b')
+					->addOrderBy('b.created', 'DESC')
+					->getQuery()
+					->getResult();
+
+
+		return $this->render('MusicMBundle:Page:sidebar.html.twig', array(
+			'Songs' => $Songs
+		));
 
 	}
 

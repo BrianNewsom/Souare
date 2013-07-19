@@ -1,10 +1,26 @@
 {# src/Blogger/BlogBundle/Resources/views/Page/sidebar.html.twig #}
 
-<section class="section">
-    <header>
-        <h3>Tag Cloud</h3>
-    </header>
-    <p class="tags">
-            <p>There are no tags</p>
-    </p>
-</section>
+	{% for Song in Songs %}
+        <article class="Track">
+            <div class="date"><time datetime="{{ Song.created|date('c') }}">{{ Song.created|date('l, F j, Y') }}</time></div>
+            <header>
+                <p><a href="{{ path('MusicMBundle_Song_show', { 'id': Song.id }) }}">{{ Song.title }}</a> by <a href="{{ path('MusicMBundle_Profile_show', { 'slug': Song.owner }) }}">{{Song.owner}}</a></p>
+            </header>
+            
+            <hr>
+{#          
+            <img src="{{ asset(['images/', blog.image]|join) }}" />
+            <div class="snippet">
+                <p>{{ blog.blog(500) }}</p>
+                <p class="continue"><a href="{{ path('BloggerBlogBundle_blog_show', { 'id': blog.id }) }}">Continue reading...</a></p>
+            </div>
+
+            <footer class="meta">
+                <p>Comments: -</p>
+                <p>Posted by <span class="highlight">{{blog.author}}</span> at {{ blog.created|date('h:iA') }}</p>
+                <p>Tags: <span class="highlight">{{ blog.tags }}</span></p>
+            </footer>#}
+        </article>
+    {% else %}
+        <p>There are no Songs</p>
+    {% endfor %}
