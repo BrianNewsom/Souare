@@ -10,6 +10,7 @@
             {#<h2> {{Track.name|upper}}, a <b>{{Track.instrument|upper}}</b> track on Souare </h1>#}
         </header>
         <div class="date">Originally published on <time datetime="{{ Track.created|date('c') }}">{{ Track.created|date('g:i A F j, Y') }}</time></div>
+        Reputation = {{Track.Reputation}}
         <br>
 
         <audio controls>
@@ -18,17 +19,18 @@
         {#<source src="#" type="audio/ogg"> TODO ADD OGG SUPPORT also convert above to mp3 for legit #}
         Your browser does not support the audio element.
         </audio>
-        {% if form is defined %}
-        <form action="{{ path('MusicMBundle_Track_show', {'id':Track.id }) }}" method="post" {{ form_enctype(form) }} class="addTrackButton">
-            {{ form_errors(form) }}
-            {{ form_rest(form) }}
+        <div class="buttons">
+            <form action="{{ path('MusicMBundle_Track_show', {'id':Track.id }) }}" method="post" {{ form_enctype(form) }} class="track"> {# Add to song button #}
+                {{ form_errors(form) }}
+                {{ form_rest(form) }}
+            {#<input type="submit" value="Add To My Song" />#}
+           {#} <form class="addTrackButton">
+                {{ form(form) }}
+            </form>#}
+            {#<input type="submit" value="+1" />#}
+            </form>
+        </div>
 
-        <input type="submit" value="Add To My Song" />
-       {#} <form class="addTrackButton">
-            {{ form(form) }}
-        </form>#}
-        {% else %}
-        {% endif %}
         {#
             <div class="date"><time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('l, F j, Y') }}</time></div>
             <h2>{{ blog.title }}</h2>

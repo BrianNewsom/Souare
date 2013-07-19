@@ -4,9 +4,9 @@
 
 {% block body %}
     <header>
-        <h1>Upload your own Song</h1>
+        <h1>Create a song starting with "{{Track.name}}"</h1>
     </header>
-    <form action="{{ path('MusicMBundle_addSongFromTrack', {'id': id}) }}" method="post" {{ form_enctype(form) }} class="track">
+    <form action="{{ path('MusicMBundle_addSongFromTrack', {'id': Track.id}) }}" method="post" {{ form_enctype(form) }} class="track">
         {{ form_errors(form) }}
 
         {{ form_row(form.title) }}

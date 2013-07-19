@@ -49,6 +49,13 @@ class Track
      */
     protected $creator;
 
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\NotBlank
+     */
+    protected $reputation = 0; 
+
+
     public function __construct()
     {
         $this->setCreated(new \DateTime());
@@ -338,4 +345,40 @@ class Track
         return;
     }
 
+
+    /**
+     * Set reputation
+     *
+     * @param integer $reputation
+     * @return Track
+     */
+    public function setReputation($reputation)
+    {
+        $this->reputation = $reputation;
+    
+        return $this;
+    }
+
+    /**
+     * Get reputation
+     *
+     * @return integer 
+     */
+    public function getReputation()
+    {
+        return $this->reputation;
+    }
+    /**
+     * Add 1 to reputation
+     *
+     * @param integer $reputation
+     * @return Track
+     */
+
+    public function addReputation()
+    {
+        $currentRep = $this->getReputation();
+        $this->setReputation($currentRep+1);
+        return $this;
+    }
 }

@@ -19,14 +19,26 @@ class TrackController extends Controller
         $Track = $this->getTrack($id);
 
         $form = $this->createFormBuilder($Track)  /*# Add track to song button #}*/
+            //->add('save_and_add', 'submit')
+            ->add('Add_To_My_Song', 'submit')
+            ->add('+1', 'submit')
             ->getForm();
         $form->handleRequest($request);
         //var_dump($Track);
         if ($form->isValid()) {
-            return $this->redirect($this->generateUrl('MusicMBundle_Track_addTrackToSong', array(
-                'id' => $id,
-            )));
+            if ($form->get('Add_To_My_Song')->isClicked()) {
+                return $this->redirect($this->generateUrl('MusicMBundle_Track_addTrackToSong', array(
+                    'id' => $id,
+                )));
+            }
 
+            if ($form->get('+1')->isClicked()) {
+                //If user hasn't already
+                $em = $this->getDoctrine()->getManager();
+                $Track->addReputation();
+                $em->persist($Track);
+                $em->flush();
+            }
         } 
 
         return $this->render('MusicMBundle:Track:show.html.twig', array(

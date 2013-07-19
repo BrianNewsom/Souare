@@ -28,7 +28,7 @@ class PageController extends Controller
 		$Tracks = $em->createQueryBuilder()
 					->select('b')
 					->from('MusicMBundle:Track',  'b')
-					->addOrderBy('b.created', 'DESC')
+					->addOrderBy('b.reputation', 'DESC')
 					->getQuery()
 					->getResult();
 
@@ -135,7 +135,7 @@ class PageController extends Controller
 					'Song'      => $Song,
 				));
 			}
-		return $this->render('MusicMBundle:Page:addsongfromtrack.html.twig', array('form' => $form->createView(), 'id' => $id));
+		return $this->render('MusicMBundle:Page:addsongfromtrack.html.twig', array('form' => $form->createView(), 'Track' => $Track));
 			//return $this->redirect($this->generateUrl('MusicMBundle_addtrack'));
 	}
 

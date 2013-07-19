@@ -85,6 +85,7 @@ class User extends BaseUser
     public function songArray()
     {
         $returnArray[NULL] = '';
+        $returnArray['new'] = 'Create New Song';
         foreach ($this->songs as $song)
         {
             $title = $song->getTitle();

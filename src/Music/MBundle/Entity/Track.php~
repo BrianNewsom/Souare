@@ -49,6 +49,13 @@ class Track
      */
     protected $creator;
 
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\NotBlank
+     */
+    protected $reputation = 0; 
+
+
     public function __construct()
     {
         $this->setCreated(new \DateTime());

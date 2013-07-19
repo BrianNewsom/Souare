@@ -24,15 +24,15 @@ class Task
      * @ORM\Column(type="array", length=255)
      * @Assert\NotBlank
      */
-    protected $data;
+    protected $Song;
 
-    public function getData()
+    public function getSong()
     {
-        return $this->data;
+        return $this->Song;
     }
-    public function setData($data)
+    public function setSong($Song)
     {
-        $this->data = $data;
+        $this->Song = $Song;
     }
 
 
