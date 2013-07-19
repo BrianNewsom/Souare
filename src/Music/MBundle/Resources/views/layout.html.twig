@@ -1,8 +1,13 @@
 {% extends '::base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/MusicM/css/track.css') }}" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('bundles/MusicM/css/button.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
 {% block sidebar %}
-              {#  {{ facebook_login_button({'autologoutlink': true}) }} FACEBOOK #
-                <br>
-                <br>
-                Hello {#{{ app.user.username }}#}Put some logic to display related facebook or feed stuffs
+              {#  {{ facebook_login_button({'autologoutlink': true}) }} FACEBOOK #}
+{% render controller("MusicMBundle:Page:sidebar") %}
+
 {% endblock %}

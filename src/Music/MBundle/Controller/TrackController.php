@@ -19,7 +19,6 @@ class TrackController extends Controller
         $Track = $this->getTrack($id);
 
         $form = $this->createFormBuilder($Track)  /*# Add track to song button #}*/
-            ->add('Add To My Song', 'submit')
             ->getForm();
         $form->handleRequest($request);
         //var_dump($Track);

@@ -11,10 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 class PageController extends Controller
 {
 	public function indexAction()
-    {
+	{
 
-        return $this->render('MusicMBundle:Page:index.html.twig');
-    }
+		return $this->render('MusicMBundle:Page:index.html.twig');
+	}
 	/*public function indexAction()
 	{
 		return $this->render('MusicMBundle:Page:index.html.twig');
@@ -22,92 +22,91 @@ class PageController extends Controller
 
 	public function chartsAction()
 	{
-        $em = $this->getDoctrine()
-                   ->getManager();
+		$em = $this->getDoctrine()
+				   ->getManager();
 
-        $Tracks = $em->createQueryBuilder()
-                    ->select('b')
-                    ->from('MusicMBundle:Track',  'b')
-                    ->addOrderBy('b.created', 'DESC')
-                    ->getQuery()
-                    ->getResult();
+		$Tracks = $em->createQueryBuilder()
+					->select('b')
+					->from('MusicMBundle:Track',  'b')
+					->addOrderBy('b.created', 'DESC')
+					->getQuery()
+					->getResult();
 
-        return $this->render('MusicMBundle:Page:charts.html.twig', array(
-            'Tracks' => $Tracks
-        ));
+		return $this->render('MusicMBundle:Page:charts.html.twig', array(
+			'Tracks' => $Tracks
+		));
 	}
 
 	public function addTrackAction(Request $request)
 	{
-	    $Track = new Track();
-	    $form = $this->createFormBuilder($Track)
-	        ->add('name')
-	        ->add('instrument')
-	        ->add('file')
-	        ->getForm();
+		$Track = new Track();
+		$form = $this->createFormBuilder($Track)
+			->add('name')
+			->add('instrument')
+			->add('file')
+			->getForm();
 
-	    $form->handleRequest($request);
+		$form->handleRequest($request);
 
-	    if ($form->isValid()) {
-		    $em = $this->getDoctrine()->getManager();
+		if ($form->isValid()) {
+			$em = $this->getDoctrine()->getManager();
 
-		    //$document->upload();
-		    $user = $this->getUser(); //Store who created the track
-		    $Track->setCreator($user);
+			//$document->upload();
+			$user = $this->getUser(); //Store who created the track
+			$Track->setCreator($user);
 		   // var_dump($user);
-		    $em->persist($Track);
-		    $em->flush();
-		    
-		    return $this->render('MusicMBundle:Track:show.html.twig', array(
-        	    'Track'      => $Track,
-    	    ));
-		    //return $this->redirect($this->generateUrl('MusicMBundle_addtrack'));
+			$em->persist($Track);
+			$em->flush();
+			
+			return $this->render('MusicMBundle:Track:show.html.twig', array(
+				'Track'      => $Track,
+			));
+			//return $this->redirect($this->generateUrl('MusicMBundle_addtrack'));
 		}
 		/*return $this->render('MusicMBundle:Track:show.html.twig', array(
 			'form' => $form->createView(), 
 			'Track' => $Track,
 			));*/
-	    return $this->render('MusicMBundle:Page:addtrack.html.twig', array('form' => $form->createView()));
+		return $this->render('MusicMBundle:Page:addtrack.html.twig', array('form' => $form->createView()));
 	}
 
 	public function addSongAction(Request $request)
 	{
 		$Song = new Song();
-	    $form = $this->createFormBuilder($Song)
-	        ->add('title')
-	        ->getForm();
-       	$em = $this->getDoctrine()
-                   ->getManager();
+		$form = $this->createFormBuilder($Song)
+			->add('title')
+			->getForm();
 
-        $Tracks = $em->createQueryBuilder()
-                    ->select('b')
-                    ->from('MusicMBundle:Track',  'b')
-                    ->addOrderBy('b.created', 'DESC')
-                    ->getQuery()
-                    ->getResult();
-        var_dump($Tracks);
-	    $Song->setTracks($Tracks);
-	    $form->handleRequest($request);
-	    if ($form->isValid()) {
-		    $em = $this->getDoctrine()->getManager();
+		/*
+		$tracks = $em->createQueryBuilder()
+					->select('b')
+					->from('MusicMBundle:Track',  'b')
+					->addOrderBy('b.created', 'DESC')
+					->getQuery()
+					->getResult();
+		//var_dump($Tracks);
+		$Song->setTracks($Tracks);*/
+		$form->handleRequest($request);
+		if ($form->isValid()) {
+			$em = $this->getDoctrine()->getManager();
 
-		    //$document->upload();
-		    $user = $this->getUser(); //Store who created the track
-		    $Song->setOwner($user);
+			//$document->upload();
+			$user = $this->getUser(); //Store who created the track
+			$Song->setOwner($user);
 			$user->addSong($Song);
-		    $em->persist($Song);
-		    $em->flush();
-		    
-		    return $this->render('MusicMBundle:Song:show.html.twig', array(
-        	    'Song'      => $Song,
-    	    ));
-		    //return $this->redirect($this->generateUrl('MusicMBundle_addtrack'));
+			$em->persist($Song);
+			$em->flush();
+			
+			return $this->render('MusicMBundle:Song:show.html.twig', array(
+				'Song'      => $Song,
+			));
+			//return $this->redirect($this->generateUrl('MusicMBundle_addtrack'));
 		}
 		/*return $this->render('MusicMBundle:Track:show.html.twig', array(
 			'form' => $form->createView(), 
 			'Track' => $Track,
 			));*/
-	    return $this->render('MusicMBundle:Page:addsong.html.twig', array('form' => $form->createView()));
+		return $this->render('MusicMBundle:Page:addsong.html.twig', array('form' => $form->createView()));
 
 	}
 
@@ -115,29 +114,29 @@ class PageController extends Controller
 	{
 			$em = $this->getDoctrine()->getManager();
 			$Song = new Song();
-        	$Track = $em->getRepository('MusicMBundle:Track')->find($id);
-        	if (!$Track) {
-            	throw $this->createNotFoundException('Unable to find Track.');
-        	}
-        	$form = $this->createFormBuilder($Song)
-	        	->add('title')
-	        	->getForm();
+			$Track = $em->getRepository('MusicMBundle:Track')->find($id);
+			if (!$Track) {
+				throw $this->createNotFoundException('Unable to find Track.');
+			}
+			$form = $this->createFormBuilder($Song)
+				->add('title')
+				->getForm();
 
-		    $form->handleRequest($request);
-	    	if ($form->isValid()) {
+			$form->handleRequest($request);
+			if ($form->isValid()) {
 				$Song->addTrack($Track);
 				$user = $this->getUser();
-			    $Song->setOwner($user);
-			    $user->addSong($Song);
+				$Song->setOwner($user);
+				$user->addSong($Song);
 				$em->persist($Song);
 
 				$em->flush();
-			    return $this->render('MusicMBundle:Song:show.html.twig', array(
-	        	    'Song'      => $Song,
-	    	    ));
+				return $this->render('MusicMBundle:Song:show.html.twig', array(
+					'Song'      => $Song,
+				));
 			}
-	    return $this->render('MusicMBundle:Page:addsongfromtrack.html.twig', array('form' => $form->createView(), 'id' => $id));
-		    //return $this->redirect($this->generateUrl('MusicMBundle_addtrack'));
+		return $this->render('MusicMBundle:Page:addsongfromtrack.html.twig', array('form' => $form->createView(), 'id' => $id));
+			//return $this->redirect($this->generateUrl('MusicMBundle_addtrack'));
 	}
 
 
@@ -146,6 +145,12 @@ class PageController extends Controller
 		return $this->render('MusicMBundle:Page:contact.html.twig');
 	}
 
+	public function sidebarAction()
+	{
+
+		return $this->render('MusicMBundle:Page:sidebar.html.twig');
+
+	}
 
 
 }

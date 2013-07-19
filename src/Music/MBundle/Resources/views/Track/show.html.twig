@@ -4,7 +4,7 @@
 {% block title %}{{Track.name}} on Souare{% endblock %}
 
 {% block body %}
-    <article class="blog">
+    <article class="track">
         <header>
             <h2> {{ Track.name }}, a {{Track.instrument}} track by {{Track.creator}}</h2>
             {#<h2> {{Track.name|upper}}, a <b>{{Track.instrument|upper}}</b> track on Souare </h1>#}
@@ -19,9 +19,14 @@
         Your browser does not support the audio element.
         </audio>
         {% if form is defined %}
-        <div id="addToSongBut">
+        <form action="{{ path('MusicMBundle_Track_show', {'id':Track.id }) }}" method="post" {{ form_enctype(form) }} class="addTrackButton">
+            {{ form_errors(form) }}
+            {{ form_rest(form) }}
+
+        <input type="submit" value="Add To My Song" />
+       {#} <form class="addTrackButton">
             {{ form(form) }}
-        </div>
+        </form>#}
         {% else %}
         {% endif %}
         {#

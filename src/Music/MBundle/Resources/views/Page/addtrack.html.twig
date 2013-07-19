@@ -7,7 +7,7 @@
         <h1>Upload your own track</h1>
     </header>
 
-    <form action="{{ path('MusicMBundle_addtrack') }}" method="post" {{ form_enctype(form) }} class="blogger">
+    <form action="{{ path('MusicMBundle_addtrack') }}" method="post" {{ form_enctype(form) }} class="track">
         {{ form_errors(form) }}
 
         {{ form_row(form.name) }}

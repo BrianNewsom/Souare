@@ -61,3 +61,9 @@ MusicMBundle_Track_addTrackToSong:
     requirements:
         _method: GET|POST
         id: \d+
+
+MusicMBundle_sidebar:
+    pattern: /sidebar
+    defaults: { _controller: MusicMBundle:Page:sidebar}
+    requirements:
+        _method: GET
