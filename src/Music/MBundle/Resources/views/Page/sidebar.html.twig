@@ -1,5 +1,5 @@
 {# src/Blogger/BlogBundle/Resources/views/Page/sidebar.html.twig #}
-
+        
 	{% for Song in Songs %}
         <article class="Track">
             <div class="date"><time datetime="{{ Song.created|date('c') }}">{{ Song.created|date('l, F j, Y') }}</time></div>
