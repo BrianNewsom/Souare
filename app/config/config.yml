@@ -33,7 +33,7 @@ assetic:
     bundles:        [ ]
     #java: /usr/bin/java
     filters:
-        less:
+        lessphp:
             node:       /usr/local/bin/node
             node_paths: [/usr/local/lib/node_modules]
             apply_to:   "\.less$"
@@ -89,3 +89,7 @@ fos_user:
         address: SouareDevelop@gmail.com
         sender_name: Souare App
 
+bc_bootstrap:
+    assets_dir:  %kernel.root_dir%/../vendor/twitter/bootstrap
+    jquery_path: %kernel.root_dir%/../vendor/jquery/jquery/jquery-1.9.1.js
+    less_filter: lessphp

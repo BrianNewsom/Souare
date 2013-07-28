@@ -11,7 +11,7 @@
             <link href='http://fonts.googleapis.com/css?family=Irish+Grover' rel='stylesheet' type='text/css'>
             <link href='http://fonts.googleapis.com/css?family=La+Belle+Aurore' rel='stylesheet' type='text/css'>
             {#<link href="{{ asset('css/screen.css') }}" type="text/css" rel="stylesheet" />#}
-            <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+            <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet"  type='text/css'>
 
         {% endblock %}
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
@@ -23,6 +23,8 @@
                 <div class="top">
                     {% block navigation %}
                         <nav>
+                            <a class= "brand" href="{{ path('MusicMBundle_homepage') }}">Souare</a>
+                            {#
                             <ul class="navigation">
                                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                                     <li><a href="{{ path('MusicMBundle_homepage') }}">Home</a></li>
@@ -38,7 +40,7 @@
                                     <li><a href="{{ path('MusicMBundle_contact') }}">Contact</a></li>
                                 {% endif %}
                                 
-                            </ul>
+                            </ul> #}
                         </nav>
                     {% endblock %}
                 </div>
